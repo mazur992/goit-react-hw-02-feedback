@@ -13,20 +13,15 @@ export class App extends Component {
   };
   total = 0;
   incrementReviews = event => {
-    let name = event.currentTarget.textContent;
+    const { textContent } = event.currentTarget;
+    let name = textContent.toLowerCase();
 
     this.countTotalFeedback();
 
     this.setState(prevState => {
-      if (name === 'Good') {
-        return { good: prevState.good + 1 };
-      }
-      if (name === 'Neutral') {
-        return { neutral: prevState.neutral + 1 };
-      }
-      if (name === 'Bad') {
-        return { bad: prevState.bad + 1 };
-      }
+      return {
+        [name]: prevState[name] + 1,
+      };
     });
   };
   countTotalFeedback = () => {
